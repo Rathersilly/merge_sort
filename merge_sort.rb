@@ -1,6 +1,5 @@
 def merge_sort(array)
   sorted = []
-  sleep 0.1
   if array.length < 2
     return array
   else
@@ -9,31 +8,26 @@ def merge_sort(array)
     right = merge_sort(array[array.length/2..-1])
 
     while left.length > 0 || right.length > 0
-      print left, right, "\n"
       if left.length == 0
-        sorted << right[0]
-        right.delete_at(0)
+        sorted.concat(right)
+        break
       elsif right.length == 0
-        sorted << left[0]
-        left.delete_at(0)
-
+        sorted.concat(left)
+        break
       elsif left[0] < right[0] 
-        sorted << left[0]
-        left.delete_at(0)
+        sorted << left.shift
       else
-        sorted << right[0]
-        right.delete_at(0)
+        sorted << right.shift
       end
     end
-      print "sorted"
-      p sorted
  
   end
   return sorted
 
 end
 
-unsorted = (1..10).to_a.shuffle
+unsorted = []
+40.times {unsorted << rand(99)}
 puts "unsorted list: #{unsorted}"
 puts "sorted list: #{merge_sort(unsorted)}"
 
